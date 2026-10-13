@@ -2754,9 +2754,9 @@ class PlayState extends MusicBeatState
 		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
-		if (controls.controllerMode && pressArray.contains(true))
+		if (pressArray.contains(true))
 			for (i in 0...pressArray.length)
-				if(pressArray[i] && strumsBlocked[i] != true)
+				if(pressArray[i] && strumsBlocked[i] != true && (controls.controllerMode #if android || backend.MobileControls.check(keysArray[i], 'press') #end))
 					keyPressed(i);
 
 		if (startedCountdown && generatedMusic && !inCutscene)
@@ -2772,9 +2772,9 @@ class PlayState extends MusicBeatState
 		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
-		if((controls.controllerMode || strumsBlocked.contains(true)) && releaseArray.contains(true))
+		if(releaseArray.contains(true))
 			for (i in 0...releaseArray.length)
-				if(releaseArray[i] || strumsBlocked[i] == true)
+				if((releaseArray[i] || strumsBlocked[i] == true) && (controls.controllerMode || strumsBlocked.contains(true) #if android || backend.MobileControls.check(keysArray[i], 'release') #end))
 					keyReleased(i);
 	}
 

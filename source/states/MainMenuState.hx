@@ -306,8 +306,8 @@ class MainMenuState extends MusicBeatState
 		FlxG.mouse.visible = deivHitbox.visible && !controls.controllerMode;
 		final deivMouseCheck:Bool = !controls.controllerMode ? (FlxG.mouse.visible && FlxG.mouse.overlaps(deivHitbox) && FlxG.mouse.justPressed) : (controllerCursor.visible && controllerCursor.overlaps(deivHitbox) && controls.ACCEPT);
 
-		var up_p:Bool = FlxG.keys.anyJustPressed(controls.keyboardBinds['ui_up']) || FlxG.gamepads.anyJustPressed(DPAD_UP);
-		var down_p:Bool = FlxG.keys.anyJustPressed(controls.keyboardBinds['ui_down']) || FlxG.gamepads.anyJustPressed(DPAD_DOWN);
+		var up_p:Bool = controls.UI_UP_P;
+		var down_p:Bool = controls.UI_DOWN_P;
 		if (up_p || down_p)
 		{
 			FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -700,7 +700,7 @@ private class EasterEggHandler
 			}
 
 		if (!currentEggs.contains(EasterEgg.JABUTICABA)) return;
-		if (canSkipJabuticaba && FlxG.keys.justPressed.ANY)
+		if (canSkipJabuticaba && (FlxG.keys.justPressed.ANY || Controls.instance.ACCEPT))
 		{
 			if (!jabuticabaSnd?.playing)
 			{
