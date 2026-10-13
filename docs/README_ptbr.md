@@ -30,3 +30,7 @@ Já para fazer mods, basta seguir as [instruções de build](/docs/BUILDING_ptbr
 | Psych Engine | [ShadowMario e _contribuições_](https://github.com/ShadowMario/FNF-PsychEngine/tree/main?tab=readme-ov-file#credits) |
 | Friday Night Funkin' | [The Funkin' Crew Inc](https://funkin.me) |
 | Mundo Torajo | Bruno Gemin, Isabela Silva (Saberaa), e a _turma do porão_<br>![turma do porão](https://pbs.twimg.com/media/GdF-U0QXsAAMI-x?format=png&name=small) |
+
+## Android
+
+Veja [o guia do port Android](ANDROID.md) para gerar e instalar o APK.
