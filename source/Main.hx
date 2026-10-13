@@ -160,7 +160,12 @@ class Main extends Sprite
 		final trueInitialState:InitialState = updateWarn ? () -> new states.OutdatedState(initialState) : initialState;
 		#end
 		FlxTransitionableState.skipNextTransIn = true;
+		#if android
+		addChild(new FlxGame(1280, 720, () -> new backend.AndroidBootstrapState(trueInitialState), 60, 60, true, true));
+		backend.MobileControls.install(this);
+		#else
 		addChild(new FlxGame(0, 0, trueInitialState, 60, 60, true, FlxG.save.data.fullscreen));
+		#end
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
 		fpsVar = new FPSCounter(10, 3);
@@ -192,7 +197,7 @@ class Main extends Sprite
 		#end
 
 		ClientPrefs.loadPrefs();
-		Language.reloadPhrases();
+		#if !android Language.reloadPhrases(); #end
 		#if DISCORD_ALLOWED DiscordClient.prepare(); #end
 
 		FlxG.fixedTimestep = false;
