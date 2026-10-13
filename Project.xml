@@ -19,15 +19,15 @@
 	<define name="HSCRIPT_ALLOWED" 			unless="web" />
 	<define name="LUA_ALLOWED" 					unless="web" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="DISCORD_ALLOWED"  		if="cpp"/>
+	<define name="DISCORD_ALLOWED"  		if="desktop"/>
 	<define name="TRANSLATIONS_ALLOWED" unless="DEMO" />
-	<define name="VIDEOS_ALLOWED" 			if="windows || linux || android || mac" unless="32"/>
+	<define name="VIDEOS_ALLOWED" 			if="desktop" unless="32"/>
 
-	<define name="MULTITHREADED_LOADING" unless="ios || 32" /> <!-- UNCOMMENTING THIS LINE WILL ENABLE MULTITHREADED LOADING, WHICH IMPROVES LOADING TIMES, BUT APPARENTLY CAN FREEZE THE GAME ON SONG LOAD IN OLDER PCs? -->
+	<define name="MULTITHREADED_LOADING" unless="mobile || 32" /> <!-- UNCOMMENTING THIS LINE WILL ENABLE MULTITHREADED LOADING, WHICH IMPROVES LOADING TIMES, BUT APPARENTLY CAN FREEZE THE GAME ON SONG LOAD IN OLDER PCs? -->
 	<define name="SHOW_LOADING_SCREEN" />
 
 	<define name="IRIS_DEBUG" if="HSCRIPT_ALLOWED"/>
-	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB" if="LUA_ALLOWED"/> <!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB" if="LUA_ALLOWED desktop"/> <!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
 	
 	<!-- ____________________________ Window Settings ___________________________ -->
 
@@ -47,6 +47,12 @@
 	<set name="BUILD_DIR" value="export/32bit" 		if="32" />
 	<classpath name="source" />
 
+	<section if="android">
+		<app version="1.0.1" />
+		<config type="android" minimum-sdk-version="23" target-sdk-version="34" build-tools-version="34.0.0" />
+		<architecture name="ARM64" exclude="ARMV7" />
+	</section>
+
 	<!-- __________________________ Game Assets & Etc. __________________________ -->
 	
 	<define name="CRASH_HANDLER" if="release" />
@@ -58,6 +64,7 @@
 	<assets path="assets/embed" 								embed="true"/>
 	<assets path="assets/videos" 								if="VIDEOS_ALLOWED"/>
 	<assets path="assets/songs"/>
+	<assets path="assets/android-files.json" type="text" if="android"/>
 	<assets path="assets/week_assets"   				rename="assets"/>
 	<assets path="assets/translations" 					rename="assets" if="TRANSLATIONS_ALLOWED"/>
 
